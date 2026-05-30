@@ -1,30 +1,36 @@
-pipeline{
+pipeline {
     agent any
-    tools{
+
+    tools {
         maven 'maven-3.8.4'
     }
-    stages{
-        stage('Checkout'){
-            steps{
-                git branch: 'main', url: 'https://github.com/RagulKannan2005/pipeline.git'
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main',
+                    url: 'https://github.com/RagulKannan2005/pipeline.git'
             }
         }
-        stage('Build'){
-            steps{
+
+        stage('Build') {
+            steps {
                 sh 'mvn clean install -DskipTests=true'
             }
         }
-        stage('Test'){
-            steps{
-                sh 'mvn test -DskipTests'
+
+        stage('Test') {
+            steps {
+                sh 'mvn test'
             }
         }
     }
-    post{
-        success{
+
+    post {
+        success {
             echo 'Build and Test successful!'
         }
-        failure{
+        failure {
             echo 'Build or Test failed.'
         }
     }
