@@ -1,37 +1,33 @@
-pipeline {
+pipeline{
     agent any
+    stages{
+        stage('Check Java Version'){
+            steps{
+                bat 'java -version'
+                bat 'javac -version'
+            }
 
-    <!-- tools {
-        maven 'maven-3.8.4'
-    } -->
+        }
+        stage('Compile Java Code'){
+            steps{
+                bat 'javac text_file.java'
 
-    stages {
-        stage('Checkout') {
-            steps {
-                git : 'main',
-                url: 'https://github.com/RagulKannan2005/pipeline.git'
             }
         }
-
-        stage('Build') {
-            steps {
-                sh 'mvn clean install -DskipTests=true'
+        stage('Run Java Code'){
+            steps{
+                bat 'java text_file'
             }
         }
-
-        stage('Test') {
-            steps {
-                sh 'mvn test'
-            }
-        }
+        
+        
     }
-
-    post {
-        success {
-            echo 'Build and Test successful!'
+    post{
+        success{
+            echo 'Build and execution successful!'
         }
-        failure {
-            echo 'Build or Test failed.'
+        failure{
+            echo 'Build or execution failed.'
         }
     }
 }
