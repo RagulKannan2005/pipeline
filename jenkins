@@ -1,15 +1,15 @@
 pipeline {
     agent any
 
-    tools {
+    <!-- tools {
         maven 'maven-3.8.4'
-    }
+    } -->
 
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main',
-                    url: 'https://github.com/RagulKannan2005/pipeline.git'
+                git : 'main',
+                url: 'https://github.com/RagulKannan2005/pipeline.git'
             }
         }
 
